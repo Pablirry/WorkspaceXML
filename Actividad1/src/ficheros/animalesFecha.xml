@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<animales>
+   <animal>
+      <CodAnimal>codA1</CodAnimal>
+      <Nombre>lolo</Nombre>
+      <Raza>bichon maltes</Raza>
+      <FechaNac>
+          <dia>29</dia>
+          <mes>05</mes>
+          <año>2021</año>
+      </FechaNac>    
+   </animal>
+   <animal>
+      <CodAnimal>codA2</CodAnimal>
+      <Nombre>loky</Nombre>
+      <Raza>terrier</Raza>
+      <FechaNac>
+          <dia>12</dia>
+          <mes>02</mes>
+          <año>2021</año>
+      </FechaNac>  
+   </animal>
+   <animal>
+      <CodAnimal>codB1</CodAnimal>
+      <Nombre>max</Nombre>
+      <Raza>conejo enano</Raza>
+      <FechaNac>
+          <dia>20</dia>
+          <mes>03</mes>
+          <año>2020</año>
+      </FechaNac>  
+   </animal>
+</animales>
