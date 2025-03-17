@@ -1,0 +1,90 @@
+# Proyecto
+
+## Actividad1/
+- .classpath
+- .gitignore
+- .project
+- .settings/
+  - org.eclipse.core.resources.prefs
+  - org.eclipse.jdt.core.prefs
+- bin/
+  - ...
+- src/
+  - clinicaanimales/
+    - Animal.java
+    - Clinica.java
+    - MainClinicaAnimales.java
+    - MiExcepcion.java
+  - ficheros/
+    - animales.csv
+    - animales.xml
+    - animales2.xml
+    - animalesFecha.xml
+  - module-info.java
+
+## Ejemplo1/
+- .classpath
+- .gitignore
+- .project
+- coches.xml
+- .settings/
+  - org.eclipse.core.resources.prefs
+  - org.eclipse.jdt.core.prefs
+- bin/
+  - ...
+- src/
+  - Ejemplo/
+    - Coche.java
+    - Main.java
+    - Main2.java
+  - module-info.java
+
+## PracticaXML/
+- .classpath
+- .gitignore
+- .project
+- .settings/
+  - org.eclipse.core.resources.prefs
+  - org.eclipse.jdt.core.prefs
+- .vscode/
+  - settings.json
+- bin/
+  - ui/
+    - BibliotecaApp.class
+    - LibrosView.class
+    - MainView.class
+    - PrestamosView.class
+    - UsuariosView.class
+    - styles.css
+  - Model/
+    - Libro.class
+    - Prestamo.class
+    - Usuario.class
+  - Interface/
+    - Main.class
+  - Logic/
+    - Biblioteca.class
+  - Ficheros/
+    - biblioteca.xml
+    - biblioteca_actualizada.xml
+  - module-info.class
+- src/
+  - Interface/
+    - Main.java
+  - Logic/
+    - Biblioteca.java
+  - Model/
+    - Libro.java
+    - Prestamo.java
+    - Usuario.java
+  - ui/
+    - BibliotecaApp.java
+    - LibrosView.java
+    - MainView.java
+    - PrestamosView.java
+    - UsuariosView.java
+    - styles.css
+  - Ficheros/
+    - biblioteca.xml
+    - biblioteca_actualizada.xml
+  - module-info.java
