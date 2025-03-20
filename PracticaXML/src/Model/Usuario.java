@@ -1,17 +1,18 @@
 package Model;
 
 public class Usuario {
-    private String id;
+
+    private int id;
     private String nombre;
     private String nacionalidad;
 
-    public Usuario(String id, String nombre, String nacionalidad) {
+    public Usuario(int id, String nombre, String nacionalidad) {
         this.id = id;
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

@@ -34,12 +34,8 @@ public class Biblioteca {
             leerUsuarios(doc);
             leerPrestamos(doc);
 
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            System.err.println("Error al leer ficheros: " + e.getMessage());
         }
     }
 
@@ -47,17 +43,21 @@ public class Biblioteca {
         NodeList nodosPrestamos = doc.getElementsByTagName("prestamo");
         for (int i = 0; i < nodosPrestamos.getLength(); i++) {
             Node nPrestamo = nodosPrestamos.item(i);
+            if (nPrestamo.getNodeType() == Node.ELEMENT_NODE) {
+                Element ePrestamo = (Element) nPrestamo;
+                try {
+                    int id = Integer.parseInt(ePrestamo.getAttribute("id"));
+                    int idUsuario = Integer.parseInt(getElement(ePrestamo, "idUsuario"));
+                    int idLibro = Integer.parseInt(getElement(ePrestamo, "idLibro"));
+                    String fechaInicio = getElement(ePrestamo, "fechaInicio");
+                    String fechaFin = getElement(ePrestamo, "fechaFin");
 
-            Element ePrestamo = (Element) nPrestamo;
-
-            String id = ePrestamo.getElementsByTagName("id").item(0).getTextContent();
-            String idUsuario = ePrestamo.getElementsByTagName("idUsuario").item(0).getTextContent();
-            String idLibro = ePrestamo.getElementsByTagName("idLibro").item(0).getTextContent();
-            String fechaInicio = ePrestamo.getElementsByTagName("fechaInicio").item(0).getTextContent();
-            String fechaFin = ePrestamo.getElementsByTagName("fechaFin").item(0).getTextContent();
-
-            Prestamo prestamo = new Prestamo(id, idUsuario, idLibro, fechaInicio, fechaFin);
-            prestamos.add(prestamo);
+                    Prestamo prestamo = new Prestamo(id, idUsuario, idLibro, fechaInicio, fechaFin);
+                    prestamos.add(prestamo);
+                } catch (Exception e) {
+                    System.err.println("Error al leer prestamo: " + e.getMessage());
+                }
+            }
         }
     }
 
@@ -65,15 +65,19 @@ public class Biblioteca {
         NodeList nodosUsuarios = doc.getElementsByTagName("usuario");
         for (int i = 0; i < nodosUsuarios.getLength(); i++) {
             Node nUsuario = nodosUsuarios.item(i);
+            if (nUsuario.getNodeType() == Node.ELEMENT_NODE) {
+                Element eUsuario = (Element) nUsuario;
+                try {
+                    int id = Integer.parseInt(eUsuario.getAttribute("id"));
+                    String nombre = getElement(eUsuario, "nombre");
+                    String nacionalidad = getElement(eUsuario, "nacionalidad");
 
-            Element eUsuario = (Element) nUsuario;
-
-            String id = eUsuario.getElementsByTagName("id").item(0).getTextContent();
-            String nombre = eUsuario.getElementsByTagName("nombre").item(0).getTextContent();
-            String nacionalidad = eUsuario.getElementsByTagName("nacionalidad").item(0).getTextContent();
-
-            Usuario usuario = new Usuario(id, nombre, nacionalidad);
-            usuarios.add(usuario);
+                    Usuario usuario = new Usuario(id, nombre, nacionalidad);
+                    usuarios.add(usuario);
+                } catch (Exception e) {
+                    System.err.println("Error al leer usuario: " + e.getMessage());
+                }
+            }
         }
     }
 
@@ -81,18 +85,30 @@ public class Biblioteca {
         NodeList nodosLibros = doc.getElementsByTagName("libro");
         for (int i = 0; i < nodosLibros.getLength(); i++) {
             Node nLibro = nodosLibros.item(i);
+            if (nLibro.getNodeType() == Node.ELEMENT_NODE) {
+                Element eLibro = (Element) nLibro;
+                try {
+                    int id = Integer.parseInt(eLibro.getAttribute("id"));
+                    String titulo = getElement(eLibro, "titulo");
+                    String genero = getElement(eLibro, "genero");
+                    int ano = Integer.parseInt(getElement(eLibro, "ano"));
+                    String autor = getElement(eLibro, "autor");
 
-            Element eLibro = (Element) nLibro;
-
-            String id = eLibro.getElementsByTagName("id").item(0).getTextContent();
-            String titulo = eLibro.getElementsByTagName("titulo").item(0).getTextContent();
-            String genero = eLibro.getElementsByTagName("genero").item(0).getTextContent();
-            String ano = eLibro.getElementsByTagName("ano").item(0).getTextContent();
-            String autor = eLibro.getElementsByTagName("autor").item(0).getTextContent();
-
-            Libro libro = new Libro(id, titulo, genero, ano, autor);
-            libros.add(libro);
+                    Libro libro = new Libro(id, titulo, genero, ano, autor);
+                    libros.add(libro);
+                } catch (Exception e) {
+                    System.err.println("Error al leer libro: " + e.getMessage());
+                }
+            }
         }
+    }
+
+    private String getElement(Element element, String tagName) throws Exception {
+        NodeList nodeList = element.getElementsByTagName(tagName);
+        if (nodeList.getLength() == 0) {
+            throw new Exception("Elemento " + tagName + " no encontrado");
+        }
+        return nodeList.item(0).getTextContent();
     }
 
     public void escribirFicheroXML(String rutaBiblioteca) {
@@ -107,9 +123,7 @@ public class Biblioteca {
             Element librosElement = doc.createElement("libros");
             for (Libro libro : libros) {
                 Element eLibro = doc.createElement("libro");
-
-                Element eId = doc.createElement("id");
-                eId.setTextContent(libro.getId());
+                eLibro.setAttribute("id", String.valueOf(libro.getId()));
 
                 Element eTitulo = doc.createElement("titulo");
                 eTitulo.setTextContent(libro.getTitulo());
@@ -118,12 +132,11 @@ public class Biblioteca {
                 eGenero.setTextContent(libro.getGenero());
 
                 Element eAno = doc.createElement("ano");
-                eAno.setTextContent(libro.getAno());
+                eAno.setTextContent(String.valueOf(libro.getAno()));
 
                 Element eAutor = doc.createElement("autor");
                 eAutor.setTextContent(libro.getAutor());
 
-                eLibro.appendChild(eId);
                 eLibro.appendChild(eTitulo);
                 eLibro.appendChild(eGenero);
                 eLibro.appendChild(eAno);
@@ -136,9 +149,7 @@ public class Biblioteca {
             Element usuariosElement = doc.createElement("usuarios");
             for (Usuario usuario : usuarios) {
                 Element eUsuario = doc.createElement("usuario");
-
-                Element eId = doc.createElement("id");
-                eId.setTextContent(usuario.getId());
+                eUsuario.setAttribute("id", String.valueOf(usuario.getId()));
 
                 Element eNombre = doc.createElement("nombre");
                 eNombre.setTextContent(usuario.getNombre());
@@ -146,7 +157,6 @@ public class Biblioteca {
                 Element eNacionalidad = doc.createElement("nacionalidad");
                 eNacionalidad.setTextContent(usuario.getNacionalidad());
 
-                eUsuario.appendChild(eId);
                 eUsuario.appendChild(eNombre);
                 eUsuario.appendChild(eNacionalidad);
 
@@ -157,15 +167,13 @@ public class Biblioteca {
             Element prestamosElement = doc.createElement("prestamos");
             for (Prestamo prestamo : prestamos) {
                 Element ePrestamo = doc.createElement("prestamo");
-
-                Element eId = doc.createElement("id");
-                eId.setTextContent(prestamo.getId());
+                ePrestamo.setAttribute("id", String.valueOf(prestamo.getId()));
 
                 Element eIdLibro = doc.createElement("idLibro");
-                eIdLibro.setTextContent(prestamo.getIdLibro());
+                eIdLibro.setTextContent(String.valueOf(prestamo.getIdLibro()));
 
                 Element eIdUsuario = doc.createElement("idUsuario");
-                eIdUsuario.setTextContent(prestamo.getIdUsuario());
+                eIdUsuario.setTextContent(String.valueOf(prestamo.getIdUsuario()));
 
                 Element eFechaInicio = doc.createElement("fechaInicio");
                 eFechaInicio.setTextContent(prestamo.getFechaInicio());
@@ -173,7 +181,6 @@ public class Biblioteca {
                 Element eFechaFin = doc.createElement("fechaFin");
                 eFechaFin.setTextContent(prestamo.getFechaFin());
 
-                ePrestamo.appendChild(eId);
                 ePrestamo.appendChild(eIdLibro);
                 ePrestamo.appendChild(eIdUsuario);
                 ePrestamo.appendChild(eFechaInicio);
@@ -192,9 +199,7 @@ public class Biblioteca {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(rutaBiblioteca);
             t.transform(source, result);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
+        } catch (ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
         }
     }
@@ -211,33 +216,73 @@ public class Biblioteca {
         return prestamos;
     }
 
-    public void anadirLibro(Libro libro) {
+    public void anadirLibro(Libro libro) throws Exception {
+        if (existeLibro(libro.getId())) {
+            throw new Exception("El libro con ID " + libro.getId() + " ya existe.");
+        }
         libros.add(libro);
     }
 
-    public void anadirUsuario(Usuario usuario) {
+    public void anadirUsuario(Usuario usuario) throws Exception {
+        if (existeUsuario(usuario.getId())) {
+            throw new Exception("El usuario con ID " + usuario.getId() + " ya existe.");
+        }
         usuarios.add(usuario);
     }
 
-    public void anadirPrestamo(Prestamo prestamo) {
+    public void anadirPrestamo(Prestamo prestamo) throws Exception {
+        if (existePrestamo(prestamo.getId())) {
+            throw new Exception("El préstamo con ID " + prestamo.getId() + " ya existe.");
+        }
         prestamos.add(prestamo);
+    }
+
+    public boolean existeLibro(int id) {
+        for (Libro libro : libros) {
+            if (libro.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeUsuario(int id) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existePrestamo(int id) {
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.getId() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void listarLibros() {
         for (Libro libro : libros) {
-            System.out.println("ID: " + libro.getId() + ", Título: " + libro.getTitulo() + ", Género: " + libro.getGenero() + ", Año: " + libro.getAno() + ", Autor: " + libro.getAutor());
+            System.out.println("ID: " + libro.getId() + ", Título: " + libro.getTitulo() + ", Género: "
+                    + libro.getGenero() + ", Año: " + libro.getAno() + ", Autor: " + libro.getAutor());
         }
     }
 
     public void listarUsuarios() {
         for (Usuario usuario : usuarios) {
-            System.out.println("ID: " + usuario.getId() + ", Nombre: " + usuario.getNombre() + ", Nacionalidad: " + usuario.getNacionalidad());
+            System.out.println("ID: " + usuario.getId() + ", Nombre: " + usuario.getNombre() + ", Nacionalidad: "
+                    + usuario.getNacionalidad());
         }
     }
 
     public void listarPrestamos() {
         for (Prestamo prestamo : prestamos) {
-            System.out.println("ID: " + prestamo.getId() + ", ID Libro: " + prestamo.getIdLibro() + ", ID Usuario: " + prestamo.getIdUsuario() + ", Fecha Inicio: " + prestamo.getFechaInicio() + ", Fecha Fin: " + prestamo.getFechaFin());
+            System.out.println("ID: " + prestamo.getId() + ", ID Libro: " + prestamo.getIdLibro() + ", ID Usuario: "
+                    + prestamo.getIdUsuario() + ", Fecha Inicio: " + prestamo.getFechaInicio() + ", Fecha Fin: "
+                    + prestamo.getFechaFin());
         }
     }
 
@@ -247,7 +292,9 @@ public class Biblioteca {
         for (Prestamo prestamo : prestamos) {
             LocalDate fechaFin = LocalDate.parse(prestamo.getFechaFin(), formater);
             if (fechaFin.isAfter(fechaActual)) {
-                System.out.println("ID: " + prestamo.getId() + ", ID Libro: " + prestamo.getIdLibro() + ", ID Usuario: " + prestamo.getIdUsuario() + ", Fecha Inicio: " + prestamo.getFechaInicio() + ", Fecha Fin: " + prestamo.getFechaFin());
+                System.out.println("ID: " + prestamo.getId() + ", ID Libro: " + prestamo.getIdLibro() + ", ID Usuario: "
+                        + prestamo.getIdUsuario() + ", Fecha Inicio: " + prestamo.getFechaInicio() + ", Fecha Fin: "
+                        + prestamo.getFechaFin());
             }
         }
     }

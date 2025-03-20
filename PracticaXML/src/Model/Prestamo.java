@@ -2,13 +2,13 @@ package Model;
 
 public class Prestamo {
 
-    private String id;
-    private String idUsuario;
-    private String idLibro;
+    private int id;
+    private int idUsuario;
+    private int idLibro;
     private String fechaInicio;
     private String fechaFin;
     
-    public Prestamo(String id, String idUsuario, String idLibro, String fechaInicio, String fechaFin) {
+    public Prestamo(int id, int idUsuario, int idLibro, String fechaInicio, String fechaFin) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idLibro = idLibro;
@@ -16,27 +16,27 @@ public class Prestamo {
         this.fechaFin = fechaFin;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public String getIdLibro() {
+    public int getIdLibro() {
         return idLibro;
     }
 
-    public void setIdLibro(String idLibro) {
+    public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
     }
 

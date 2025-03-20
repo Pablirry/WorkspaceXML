@@ -1,13 +1,13 @@
 package Model;
 
 public class Libro {
-    private String id;
+    private int id;
     private String titulo;
     private String genero;
-    private String ano;
+    private int ano;
     private String autor;
 
-    public Libro(String id, String titulo, String genero, String ano, String autor) {
+    public Libro(int id, String titulo, String genero, int ano, String autor) {
         this.id = id;
         this.titulo = titulo;
         this.genero = genero;
@@ -15,7 +15,7 @@ public class Libro {
         this.autor = autor;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -27,7 +27,7 @@ public class Libro {
         return genero;
     }
 
-    public String getAno() {
+    public int getAno() {
         return ano;
     }
 
@@ -38,10 +38,10 @@ public class Libro {
     @Override
     public String toString() {
         return "Libro{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
-                ", ano='" + ano + '\'' +
+                ", ano=" + ano +
                 ", autor='" + autor + '\'' +
                 '}';
     }

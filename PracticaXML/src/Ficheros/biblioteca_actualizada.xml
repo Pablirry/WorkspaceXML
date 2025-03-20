@@ -1,82 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <biblioteca>
    <libros>
-      <libro>
-         <id>1</id>
+      <libro id="1">
          <titulo>El Quijote</titulo>
          <genero>Novela</genero>
          <ano>1605</ano>
          <autor>Miguel de Cervantes</autor>
       </libro>
-      <libro>
-         <id>2</id>
+      <libro id="2">
          <titulo>Cien Años de Soledad</titulo>
          <genero>Realismo Mágico</genero>
          <ano>1967</ano>
          <autor>Gabriel García Márquez</autor>
       </libro>
-      <libro>
-         <id>3</id>
-         <titulo>dfkod</titulo>
-         <genero>mdfdq</genero>
-         <ano>1969</ano>
-         <autor>mdsf</autor>
+      <libro id="3">
+         <titulo>dfs</titulo>
+         <genero>sdfsd</genero>
+         <ano>2002</ano>
+         <autor>dfgdfg</autor>
       </libro>
    </libros>
    <usuarios>
-      <usuario>
-         <id>1</id>
+      <usuario id="1">
          <nombre>Juan Pérez</nombre>
          <nacionalidad>Española</nacionalidad>
       </usuario>
-      <usuario>
-         <id>2</id>
+      <usuario id="2">
          <nombre>María López</nombre>
          <nacionalidad>Colombiana</nacionalidad>
       </usuario>
+      <usuario id="3">
+         <nombre>dgf</nombre>
+         <nacionalidad>fdg</nacionalidad>
+      </usuario>
    </usuarios>
    <prestamos>
-      <prestamo>
-         <id>1</id>
+      <prestamo id="1">
          <idLibro>1</idLibro>
          <idUsuario>1</idUsuario>
          <fechaInicio>2025-03-01</fechaInicio>
          <fechaFin>2025-03-15</fechaFin>
       </prestamo>
-      <prestamo>
-         <id>2</id>
+      <prestamo id="2">
          <idLibro>2</idLibro>
          <idUsuario>2</idUsuario>
          <fechaInicio>2025-03-05</fechaInicio>
          <fechaFin>2025-03-20</fechaFin>
-      </prestamo>
-      <prestamo>
-         <id>2</id>
-         <idLibro>2</idLibro>
-         <idUsuario>2</idUsuario>
-         <fechaInicio>2025-03-05</fechaInicio>
-         <fechaFin>2025-03-20</fechaFin>
-      </prestamo>
-      <prestamo>
-         <id>2</id>
-         <idLibro>2</idLibro>
-         <idUsuario>2</idUsuario>
-         <fechaInicio>2025-03-05</fechaInicio>
-         <fechaFin>2025-03-20</fechaFin>
-      </prestamo>
-      <prestamo>
-         <id>2</id>
-         <idLibro>2</idLibro>
-         <idUsuario>2</idUsuario>
-         <fechaInicio>2025-03-05</fechaInicio>
-         <fechaFin>2025-03-20</fechaFin>
-      </prestamo>
-      <prestamo>
-         <id>3</id>
-         <idLibro>1</idLibro>
-         <idUsuario>2</idUsuario>
-         <fechaInicio>2025-03-02</fechaInicio>
-         <fechaFin>2025-03-10</fechaFin>
       </prestamo>
    </prestamos>
 </biblioteca>
