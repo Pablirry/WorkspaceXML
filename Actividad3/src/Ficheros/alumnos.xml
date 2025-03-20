@@ -1,0 +1,30 @@
+<alumnos>
+	<alumno>
+		<dni>10111111A</dni>
+		<nombre>Juan</nombre>
+		<apellidos>Alvarez Alvarez</apellidos>		
+		<direccion>Direccion X</direccion>
+		<telefono>111111111</telefono>
+		<fechaNac>20/02/2000</fechaNac>
+		<numeroTarjeta>1111 1111 1111 1111</numeroTarjeta>
+	</alumno>
+	<alumno>
+		<dni>20222222B</dni>
+		<nombre>Pepe</nombre>
+		<apellidos>Alonso Alonso</apellidos>		
+		<direccion>Direccion Y</direccion>
+		<telefono>222222222</telefono>
+		<fechaNac>20/01/2001</fechaNac>
+		<numeroTarjeta>2222 2222 2222 2222</numeroTarjeta>
+	</alumno>
+	<alumno>
+		<dni>30333333C</dni>
+		<nombre>Ana</nombre>
+		<apellidos>Garcia Garcia</apellidos>		
+		<direccion>Direccion Z</direccion>
+		<telefono>333333333</telefono>
+		<fechaNac>20/03/2002</fechaNac>
+		<numeroTarjeta>3333 3333 3333 3333</numeroTarjeta>
+	</alumno>
+</alumnos>	
+	

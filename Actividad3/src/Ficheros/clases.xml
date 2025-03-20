@@ -1,0 +1,34 @@
+<clases>
+	<clase>
+		<codClase>1</codClase>
+		<matricula>1111-ABC</matricula>
+		<dniAlumno>10111111A</dniAlumno>
+		<dia>01/09/2022</dia>
+		<horaInicio>19:00</horaInicio>
+		<horaFin>20:00</horaFin>
+	</clase>
+	<clase>
+		<codClase>2</codClase>
+		<matricula>1111-ABC</matricula>
+		<dniAlumno>20222222B</dniAlumno>
+		<dia>01/09/2022</dia>
+		<horaInicio>19:00</horaInicio>
+		<horaFin>20:00</horaFin>
+	</clase>
+	<clase>
+		<codClase>3</codClase>
+		<matricula>2222-DSA</matricula>
+		<dniAlumno>10111111A</dniAlumno>
+		<dia>02/09/2022</dia>
+		<horaInicio>19:00</horaInicio>
+		<horaFin>20:00</horaFin>
+	</clase>
+	<clase>
+		<codClase>4</codClase>
+		<matricula>2222-DSA</matricula>
+		<dniAlumno>20222222B</dniAlumno>
+		<dia>02/09/2022</dia>
+		<horaInicio>19:00</horaInicio>
+		<horaFin>20:00</horaFin>
+	</clase>
+</clases>

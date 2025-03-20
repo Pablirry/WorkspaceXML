@@ -1,0 +1,20 @@
+<coches>
+	<coche>
+		<matricula>1111-ABC</matricula>
+		<modelo>Ibiza</modelo>
+		<marca>Seat</marca>
+		<km>15000</km>
+	</coche>
+	<coche>
+		<matricula>2222-DSA</matricula>
+		<modelo>Ka</modelo>
+		<marca>Ford</marca>
+		<km>10000</km>
+	</coche>
+	<coche>
+		<matricula>3333-FSA</matricula>
+		<modelo>206</modelo>
+		<marca>Peugeot</marca>
+		<km>9000</km>
+	</coche>
+</coches>
