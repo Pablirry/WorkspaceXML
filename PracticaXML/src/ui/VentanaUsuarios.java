@@ -1,7 +1,6 @@
 package ui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import Logic.Biblioteca;
 import Model.Usuario;
 import java.awt.*;
@@ -11,8 +10,8 @@ import java.awt.event.ActionListener;
 public class VentanaUsuarios extends JPanel {
 
     private Biblioteca biblioteca;
-    private JTable table;
-    private DefaultTableModel tableModel;
+    private JList<String> listaUsuario;
+    private DefaultListModel<String> modelo;
     private JTextField idField, nombreField, nacionalidadField;
 
     public VentanaUsuarios() {
@@ -39,9 +38,9 @@ public class VentanaUsuarios extends JPanel {
 
         add(inputPanel, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Nombre", "Nacionalidad"}, 0);
-        table = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(table);
+        modelo = new DefaultListModel<>();
+        listaUsuario = new JList<>(modelo);
+        JScrollPane scrollPane = new JScrollPane(listaUsuario);
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
@@ -84,9 +83,9 @@ public class VentanaUsuarios extends JPanel {
     }
 
     private void mostrarUsuarios() {
-        tableModel.setRowCount(0);
+        modelo.clear();
         for (Usuario usuario : biblioteca.getUsuarios()) {
-            tableModel.addRow(new Object[]{usuario.getId(), usuario.getNombre(), usuario.getNacionalidad()});
+            modelo.addElement("ID: " + usuario.getId() + ", Nombre: " + usuario.getNombre() + ", Nacionalidad: " + usuario.getNacionalidad());
         }
     }
 
