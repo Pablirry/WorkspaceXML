@@ -14,8 +14,8 @@ public class VentanaPrestamos extends JPanel {
 
     private Biblioteca biblioteca;
     private JTable table;
-    private DefaultTableModel tableModel;
-    private JTextField idField, idUsuarioField, idLibroField, fechaInicioField, fechaFinField;
+    private DefaultTableModel modelo;
+    private JTextField tfId, tfIdUsuario, tfIdLibro, tfFechaInicio, tfFechaFin;
 
     public VentanaPrestamos() {
         biblioteca = new Biblioteca();
@@ -28,29 +28,29 @@ public class VentanaPrestamos extends JPanel {
         inputPanel.setBackground(new Color(245, 245, 245));
 
         inputPanel.add(new JLabel("ID:"));
-        idField = new JTextField();
-        inputPanel.add(idField);
+        tfId = new JTextField();
+        inputPanel.add(tfId);
 
         inputPanel.add(new JLabel("ID Usuario:"));
-        idUsuarioField = new JTextField();
-        inputPanel.add(idUsuarioField);
+        tfIdUsuario = new JTextField();
+        inputPanel.add(tfIdUsuario);
 
         inputPanel.add(new JLabel("ID Libro:"));
-        idLibroField = new JTextField();
-        inputPanel.add(idLibroField);
+        tfIdLibro = new JTextField();
+        inputPanel.add(tfIdLibro);
 
         inputPanel.add(new JLabel("Fecha Inicio (yyyy-MM-dd):"));
-        fechaInicioField = new JTextField();
-        inputPanel.add(fechaInicioField);
+        tfFechaInicio = new JTextField();
+        inputPanel.add(tfFechaInicio);
 
         inputPanel.add(new JLabel("Fecha Fin (yyyy-MM-dd):"));
-        fechaFinField = new JTextField();
-        inputPanel.add(fechaFinField);
+        tfFechaFin = new JTextField();
+        inputPanel.add(tfFechaFin);
 
         add(inputPanel, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel(new Object[]{"ID", "ID Usuario", "ID Libro", "Fecha Inicio", "Fecha Fin"}, 0);
-        table = new JTable(tableModel);
+        modelo = new DefaultTableModel(new Object[]{"ID", "ID Usuario", "ID Libro", "Fecha Inicio", "Fecha Fin"}, 0);
+        table = new JTable(modelo);
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -105,20 +105,20 @@ public class VentanaPrestamos extends JPanel {
     }
 
     private void mostrarPrestamos() {
-        tableModel.setRowCount(0);
+        modelo.setRowCount(0);
         for (Prestamo prestamo : biblioteca.getPrestamos()) {
-            tableModel.addRow(new Object[]{prestamo.getId(), prestamo.getIdUsuario(), prestamo.getIdLibro(), prestamo.getFechaInicio(), prestamo.getFechaFin()});
+            modelo.addRow(new Object[]{prestamo.getId(), prestamo.getIdUsuario(), prestamo.getIdLibro(), prestamo.getFechaInicio(), prestamo.getFechaFin()});
         }
     }
 
     private void mostrarPrestamosActivos() {
-        tableModel.setRowCount(0);
+        modelo.setRowCount(0);
         LocalDate fechaActual = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         for (Prestamo prestamo : biblioteca.getPrestamos()) {
             LocalDate fechaFin = LocalDate.parse(prestamo.getFechaFin(), formatter);
             if (fechaFin.isAfter(fechaActual)) {
-                tableModel.addRow(new Object[]{prestamo.getId(), prestamo.getIdUsuario(), prestamo.getIdLibro(), prestamo.getFechaInicio(), prestamo.getFechaFin()});
+                modelo.addRow(new Object[]{prestamo.getId(), prestamo.getIdUsuario(), prestamo.getIdLibro(), prestamo.getFechaInicio(), prestamo.getFechaFin()});
             }
         }
     }
@@ -126,7 +126,7 @@ public class VentanaPrestamos extends JPanel {
     private void anadirPrestamo() {
         int id;
         try {
-            id = Integer.parseInt(idField.getText());
+            id = Integer.parseInt(tfId.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -137,7 +137,7 @@ public class VentanaPrestamos extends JPanel {
         }
         int idUsuario;
         try {
-            idUsuario = Integer.parseInt(idUsuarioField.getText());
+            idUsuario = Integer.parseInt(tfIdUsuario.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El ID de usuario debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -148,7 +148,7 @@ public class VentanaPrestamos extends JPanel {
         }
         int idLibro;
         try {
-            idLibro = Integer.parseInt(idLibroField.getText());
+            idLibro = Integer.parseInt(tfIdLibro.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El ID de libro debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -157,8 +157,8 @@ public class VentanaPrestamos extends JPanel {
             JOptionPane.showMessageDialog(this, "El ID de libro no existe", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String fechaInicio = fechaInicioField.getText();
-        String fechaFin = fechaFinField.getText();
+        String fechaInicio = tfFechaInicio.getText();
+        String fechaFin = tfFechaFin.getText();
         Prestamo prestamo = new Prestamo(id, idUsuario, idLibro, fechaInicio, fechaFin);
         try {
             biblioteca.anadirPrestamo(prestamo);
@@ -170,10 +170,10 @@ public class VentanaPrestamos extends JPanel {
     }
 
     private void borrarCampos() {
-        idField.setText("");
-        idUsuarioField.setText("");
-        idLibroField.setText("");
-        fechaInicioField.setText("");
-        fechaFinField.setText("");
+        tfId.setText("");
+        tfIdUsuario.setText("");
+        tfIdLibro.setText("");
+        tfFechaInicio.setText("");
+        tfFechaFin.setText("");
     }
 }

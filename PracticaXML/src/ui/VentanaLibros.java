@@ -12,8 +12,8 @@ public class VentanaLibros extends JPanel {
 
     private Biblioteca biblioteca;
     private JTable table;
-    private DefaultTableModel tableModel;
-    private JTextField idField, tituloField, generoField, anoField, autorField;
+    private DefaultTableModel modelo;
+    private JTextField tfId, tfTitulo, tfGenero, tfAno, tfAutor;
 
     public VentanaLibros() {
         biblioteca = new Biblioteca();
@@ -21,34 +21,34 @@ public class VentanaLibros extends JPanel {
 
         setLayout(new BorderLayout());
 
-        JPanel inputPanel = new JPanel(new GridLayout(5, 2, 10, 10));
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        inputPanel.setBackground(new Color(245, 245, 245));
+        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panel.setBackground(new Color(245, 245, 245));
 
-        inputPanel.add(new JLabel("ID:"));
-        idField = new JTextField();
-        inputPanel.add(idField);
+        panel.add(new JLabel("ID:"));
+        tfId = new JTextField();
+        panel.add(tfId);
 
-        inputPanel.add(new JLabel("Título:"));
-        tituloField = new JTextField();
-        inputPanel.add(tituloField);
+        panel.add(new JLabel("Título:"));
+        tfTitulo = new JTextField();
+        panel.add(tfTitulo);
 
-        inputPanel.add(new JLabel("Género:"));
-        generoField = new JTextField();
-        inputPanel.add(generoField);
+        panel.add(new JLabel("Género:"));
+        tfGenero = new JTextField();
+        panel.add(tfGenero);
 
-        inputPanel.add(new JLabel("Año:"));
-        anoField = new JTextField();
-        inputPanel.add(anoField);
+        panel.add(new JLabel("Año:"));
+        tfAno = new JTextField();
+        panel.add(tfAno);
 
-        inputPanel.add(new JLabel("Autor:"));
-        autorField = new JTextField();
-        inputPanel.add(autorField);
+        panel.add(new JLabel("Autor:"));
+        tfAutor = new JTextField();
+        panel.add(tfAutor);
 
-        add(inputPanel, BorderLayout.NORTH);
+        add(panel, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Título", "Género", "Año", "Autor"}, 0);
-        table = new JTable(tableModel);
+        modelo = new DefaultTableModel(new Object[]{"ID", "Título", "Género", "Año", "Autor"}, 0);
+        table = new JTable(modelo);
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -92,16 +92,16 @@ public class VentanaLibros extends JPanel {
     }
 
     private void mostrarLibros() {
-        tableModel.setRowCount(0);
+        modelo.setRowCount(0);
         for (Libro libro : biblioteca.getLibros()) {
-            tableModel.addRow(new Object[]{libro.getId(), libro.getTitulo(), libro.getGenero(), libro.getAno(), libro.getAutor()});
+            modelo.addRow(new Object[]{libro.getId(), libro.getTitulo(), libro.getGenero(), libro.getAno(), libro.getAutor()});
         }
     }
 
     private void anadirLibro() {
         int id;
         try {
-            id = Integer.parseInt(idField.getText());
+            id = Integer.parseInt(tfId.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ID debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -110,16 +110,16 @@ public class VentanaLibros extends JPanel {
             JOptionPane.showMessageDialog(this, "El ID ya está registrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String titulo = tituloField.getText();
-        String genero = generoField.getText();
+        String titulo = tfTitulo.getText();
+        String genero = tfGenero.getText();
         int ano;
         try {
-            ano = Integer.parseInt(anoField.getText());
+            ano = Integer.parseInt(tfAno.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El año debe ser un número entero", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String autor = autorField.getText();
+        String autor = tfAutor.getText();
         Libro libro = new Libro(id, titulo, genero, ano, autor);
         try {
             biblioteca.anadirLibro(libro);
@@ -131,10 +131,10 @@ public class VentanaLibros extends JPanel {
     }
 
     private void borrarCampos() {
-        idField.setText("");
-        tituloField.setText("");
-        generoField.setText("");
-        anoField.setText("");
-        autorField.setText("");
+        tfId.setText("");
+        tfTitulo.setText("");
+        tfGenero.setText("");
+        tfAno.setText("");
+        tfAutor.setText("");
     }
 }

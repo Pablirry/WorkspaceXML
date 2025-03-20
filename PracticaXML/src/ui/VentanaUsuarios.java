@@ -12,7 +12,7 @@ public class VentanaUsuarios extends JPanel {
     private Biblioteca biblioteca;
     private JList<String> listaUsuario;
     private DefaultListModel<String> modelo;
-    private JTextField idField, nombreField, nacionalidadField;
+    private JTextField tfId, tfNombre, tfNacionalidad;
 
     public VentanaUsuarios() {
         biblioteca = new Biblioteca();
@@ -25,16 +25,16 @@ public class VentanaUsuarios extends JPanel {
         inputPanel.setBackground(new Color(245, 245, 245));
 
         inputPanel.add(new JLabel("ID:"));
-        idField = new JTextField();
-        inputPanel.add(idField);
+        tfId = new JTextField();
+        inputPanel.add(tfId);
 
         inputPanel.add(new JLabel("Nombre:"));
-        nombreField = new JTextField();
-        inputPanel.add(nombreField);
+        tfNombre = new JTextField();
+        inputPanel.add(tfNombre);
 
         inputPanel.add(new JLabel("Nacionalidad:"));
-        nacionalidadField = new JTextField();
-        inputPanel.add(nacionalidadField);
+        tfNacionalidad = new JTextField();
+        inputPanel.add(tfNacionalidad);
 
         add(inputPanel, BorderLayout.NORTH);
 
@@ -92,7 +92,7 @@ public class VentanaUsuarios extends JPanel {
     private void anadirUsuario() {
         int id;
         try {
-            id = Integer.parseInt(idField.getText());
+            id = Integer.parseInt(tfId.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ID debe ser un número", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -101,8 +101,8 @@ public class VentanaUsuarios extends JPanel {
             JOptionPane.showMessageDialog(this, "El ID ya está registrado", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String nombre = nombreField.getText();
-        String nacionalidad = nacionalidadField.getText();
+        String nombre = tfNombre.getText();
+        String nacionalidad = tfNacionalidad.getText();
         Usuario usuario = new Usuario(id, nombre, nacionalidad);
         try {
             biblioteca.anadirUsuario(usuario);
@@ -114,8 +114,8 @@ public class VentanaUsuarios extends JPanel {
     }
 
     private void borrarCampos() {
-        idField.setText("");
-        nombreField.setText("");
-        nacionalidadField.setText("");
+        tfId.setText("");
+        tfNombre.setText("");
+        tfNacionalidad.setText("");
     }
 }
